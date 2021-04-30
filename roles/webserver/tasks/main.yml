@@ -1,0 +1,26 @@
+---
+# tasks file for webserver
+- name: Configure UAT Webservers
+  hosts: uat-webservers
+  become: true
+
+  tasks:
+    - name: Install Apache and Git
+      yum:
+        name:
+          - httpd
+          - git
+        state: present
+    - name: Clone tooling app repo
+      git:
+        repo: "https://github.com/Anefu/tooling.git"
+        dest: ~/app
+    - name: Copy app to /var/www/html
+      copy:
+        src: ~/app/tooling/html
+        dest: /var/www/html
+        remote_src: yes
+    - name: Make sure httpd service is running
+      service:
+        name: httpd
+        state: started
