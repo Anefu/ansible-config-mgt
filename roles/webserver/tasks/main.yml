@@ -1,7 +1,6 @@
 ---
 # tasks file for webserver
-- name: Configure UAT Webservers
-  hosts: uat-webservers
+- name: Configure UAT webservers
   become: true
 
   tasks:
