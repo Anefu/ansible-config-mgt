@@ -1,0 +1,10 @@
+---
+- name: Update web, NFS and DB servers
+  hosts: webservers, nfs, db, lb
+  become: true
+
+  tasks:
+    - name: Ensure wireshark is at latest version
+      package:
+        name: wireshark
+        state: latest
