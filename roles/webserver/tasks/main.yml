@@ -18,8 +18,8 @@
 - name: Copy app to /var/www/html
   become: yes
   copy:
-    src: ~/app/tooling/html
-    dest: /var/www/html
+    src: ~/app/html
+    dest: /var/www
     remote_src: yes
     mode: "777"
     owner: apache
