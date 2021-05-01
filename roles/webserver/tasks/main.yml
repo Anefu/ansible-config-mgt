@@ -13,7 +13,7 @@
   git:
     repo: "https://github.com/Anefu/tooling.git"
     dest: ~/app
-    version: release-0.22
+    version: "HEAD"
 
 - name: Copy app to /var/www/html
   become: yes
