@@ -21,7 +21,7 @@
     src: ~/app/tooling/html
     dest: /var/www/html
     remote_src: yes
-    mode: "0777"
+    mode: "777"
     owner: apache
 
 - name: Make sure httpd service is running
