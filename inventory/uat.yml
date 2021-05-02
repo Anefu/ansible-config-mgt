@@ -1,9 +1,9 @@
 [webservers]
-34.237.143.241 ansible_user=ec2-user
-3.218.151.178 ansible_user=ec2-user
+private-ip/public-ip ansible_user=ec2-user
+private-ip/public-ip ansible_user=ec2-user
 
 [db]
-34.227.192.79 ansible_user=ubuntu
+private-ip/public-ip ansible_user=ubuntu
 
 [lb]
-34.201.98.134 ansible_user=ubuntu
+private-ip/public-ip ansible_user=ubuntu

@@ -1,5 +1,0 @@
-[lb]
-34.201.98.134
-
-[lb:vars]
-ansible_user=ubuntu
