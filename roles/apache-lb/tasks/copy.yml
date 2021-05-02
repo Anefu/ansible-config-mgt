@@ -1,0 +1,14 @@
+---
+- name: Copy configuration file
+  template:
+    src: apache.conf.j2
+    dest: /etc/apache2/conf-available/lb.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart apache2
+
+- name: Enable load balancer configuration
+  become: yes
+  command: "a2enconf lb"
+  notify: restart apache2

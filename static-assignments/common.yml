@@ -1,10 +1,8 @@
 ---
-- name: Update web, NFS and DB servers
-  hosts: webservers, nfs, db, lb
-  become: true
-
+- hosts: all
+  become: yes
   tasks:
     - name: Ensure wireshark is at latest version
       package:
         name: wireshark
-        state: latest
+        state: present

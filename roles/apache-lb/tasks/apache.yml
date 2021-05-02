@@ -1,0 +1,8 @@
+---
+- name: Update cache and install Apache and dependencies
+  apt:
+    name: 
+      - apache2
+      - libxml2-dev
+    state: present
+    update_cache: yes

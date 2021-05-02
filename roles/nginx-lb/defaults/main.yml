@@ -1,0 +1,9 @@
+---
+# defaults file for nginx-lb
+backend_instances:
+  - 172.31.7.164
+  - 172.31.7.153
+
+enable_nginx_lb: false
+
+load_balancer_is_required: false
