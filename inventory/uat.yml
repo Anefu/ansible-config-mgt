@@ -1,6 +1,9 @@
-[uat-webservers]
-172.31.53.10
-172.31.58.39
+[webservers]
+private-ip/public-ip ansible_user=ec2-user
+private-ip/public-ip ansible_user=ec2-user
 
-[uat-webservers:vars]
-ansible_user='ec2-user'
+[db]
+private-ip/public-ip ansible_user=ubuntu
+
+[lb]
+private-ip/public-ip ansible_user=ubuntu

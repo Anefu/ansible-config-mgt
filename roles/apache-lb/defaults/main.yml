@@ -1,0 +1,9 @@
+---
+# defaults file for apache-lb
+backend_instances:
+  - 172.31.7.153
+  - 172.31.7.164
+
+enable_apache_lb: false
+
+load_balancer_is_required: false

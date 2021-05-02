@@ -1,0 +1,20 @@
+---
+- name: Copy configuration file
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/conf.d/lb.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart nginx
+
+- name: Edit config file
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '(include\ \/etc\/nginx\/sites-enabled\/\*;)'
+    line: '# \1'
+    backrefs: yes
+    state: present
+  notify: restart nginx
+
+

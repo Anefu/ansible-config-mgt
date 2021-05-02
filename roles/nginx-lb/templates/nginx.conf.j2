@@ -1,0 +1,14 @@
+
+upstream myproject {
+    {% for node in backend_instances %}
+    server {{ node }} weight=5;
+    {% endfor %}
+  }
+
+server {
+    listen 80;
+    server_name www.domain.com;
+    location / {
+      proxy_pass http://myproject;
+    }
+  }

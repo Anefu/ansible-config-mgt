@@ -1,0 +1,7 @@
+---
+- hosts: lb
+  gather_facts: no
+  become: yes
+  roles: 
+    - { role: nginx-lb, when: enable_nginx_lb and load_balancer_is_required }
+    - { role: apache-lb, when: enable_apache_lb and load_balancer_is_required }
