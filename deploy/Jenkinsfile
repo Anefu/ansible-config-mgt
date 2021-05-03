@@ -1,18 +1,21 @@
 pipeline {
   agent any
+  environment {
+        current_env = 'dev'
+        roles_path    = 'ansible-config-mgt_'+current_env
+    }
   stages {
     stage('Clone repo') {
       parallel {
         stage('Clone repo') {
           steps {
-            git(branch: 'dev', url: 'https://github.com/Anefu/ansible-config-mgt.git')
+            git(branch: current_env, url: 'https://github.com/Anefu/ansible-config-mgt.git')
           }
         }
 
         stage('') {
           steps {
-            branch_path = 'ansible-config-mgt_'+env.BRANCH_NAME
-            sh ' sudo sed -i -e "s/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/${branch_name}/g" /etc/ansible/ansible.cfg'
+            sh ' sudo sed -i -e "s/#roles_path * = \/etc\/ansible\/roles/roles_path = \/var\/lib\/jenkins\/workspace\/${roles_path}/g" /etc/ansible/ansible.cfg'
           }
         }
         stage('') {
