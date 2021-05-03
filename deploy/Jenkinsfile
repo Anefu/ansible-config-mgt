@@ -15,16 +15,16 @@ pipeline {
             sh ' sudo sed -i -e "s/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/${branch_name}/g" /etc/ansible/ansible.cfg'
           }
         }
-
-      }
         stage('') {
           steps {
           sh " echo 'jenkins ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers "
           }
         }
+      }
+
 
       }
-    }
+    
 
     stage('Run playbook') {
       steps {
@@ -40,4 +40,3 @@ pipeline {
 
   }
 }
-echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
