@@ -1,6 +1,5 @@
 ---
 - hosts: nginx
-  gather_facts: no
   become: yes
   roles: 
     - { role: nginx-lb, when: enable_nginx_lb and load_balancer_is_required }
