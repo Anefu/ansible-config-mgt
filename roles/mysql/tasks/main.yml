@@ -18,19 +18,6 @@
       or (deb_mysql_install_packages is defined and deb_mysql_install_packages.changed)
       or (arch_mysql_install_packages is defined and arch_mysql_install_packages.changed) }}"
 
-- name: Copy tooling app database table
-  copy:
-       src: "{{ tooling_database_location }}"
-       dest: /home/
-       mode: 0777
-  notify: restart mysql
-
-- name: Dump tooling app database table
-  mysql_db:
-    name: tooling
-    state: import
-    target: /home/tooling-db.sql
-
 # Configure MySQL.
 - include_tasks: configure.yml
 - include_tasks: secure-installation.yml
