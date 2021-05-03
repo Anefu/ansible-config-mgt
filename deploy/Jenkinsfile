@@ -15,7 +15,7 @@ pipeline {
 
     stage('Clean up') {
       steps {
-        deleteDir()
+        cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
       }
     }
 
