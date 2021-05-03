@@ -15,7 +15,7 @@ pipeline {
 
         stage('Update ansible.cfg') {
           steps {
-            sh "sudo sed -i -e 's/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/${roles_path}/g' /etc/ansible/ansible.cfg"
+            sh "sed -i -e 's/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/${roles_path}/g' /etc/ansible/ansible.cfg"
           }
         }
       }
