@@ -123,7 +123,7 @@ mysql_users:
 #     host: 127.0.0.1
 #     password: secret
 #     priv: *.*:USAGE
-tooling_database_location: "/home/ubuntu/app/tooling-db.sql"
+tooling_database_location: "/home/ubuntu/app/tooling/tooling-db.sql"
 # Replication settings (replication is only enabled if master/user have values).
 mysql_server_id: "1"
 mysql_max_binlog_size: "100M"
