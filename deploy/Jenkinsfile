@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
         current_env = 'dev'
-        roles_path    = 'ansible-config-mgt_'+current_env
+        roles_path    = 'ansible-config-mgt_'+'current_env'
     }
   stages {
     stage('Clone repo') {
@@ -13,20 +13,13 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('Update ansible.cfg') {
           steps {
             sh "sudo sed -i -e 's/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/${roles_path}/g' /etc/ansible/ansible.cfg"
           }
         }
-        stage('') {
-          steps {
-          sh " echo 'jenkins ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers "
-          }
-        }
       }
-
-
-      }
+    }
     
 
     stage('Run playbook') {
