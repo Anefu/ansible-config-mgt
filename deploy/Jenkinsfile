@@ -2,11 +2,6 @@ pipeline {
     agent any
 
   stages {
-    stage('Clean up 1') {
-      steps {
-        deleteDir()
-      }
-    }
     stage('Clone repo') {
       steps {
         git 'https://github.com/Anefu/ansible-config-mgt.git'
@@ -16,11 +11,12 @@ pipeline {
       steps {
         ansiblePlaybook credentialsId: 'd345d25b-1b13-4ef0-91f5-5157f94f30ac', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yml', playbook: 'playbooks/site.yml'      }
     }
-    stage('Clean up') {
-      steps {
-        deleteDir()
-      }
-    }
 
+
+    }
+  post {
+      always {
+          deleteDir() /* clean up our workspace */
+        }
     }
 }
