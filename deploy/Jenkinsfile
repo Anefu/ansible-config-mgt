@@ -1,23 +1,29 @@
 pipeline {
-    agent any
-
+  agent any
   stages {
     stage('Clone repo') {
       steps {
-        git branch: 'dev', url: 'https://github.com/Anefu/ansible-config-mgt.git'
+        git(branch: 'dev', url: 'https://github.com/Anefu/ansible-config-mgt.git')
       }
     }
+
     stage('Run playbook') {
       steps {
-        ansiblePlaybook credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev', playbook: 'playbooks/site.yml'
-         }
+        ansiblePlaybook(credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev', playbook: 'playbooks/site.yml')
+      }
     }
 
-
+    stage('Clean up') {
+      steps {
+        deleteDir()
+      }
     }
+
+  }
   post {
-      always {
-          deleteDir() /* clean up our workspace */
-        }
+    always {
+      deleteDir()
     }
+
+  }
 }
