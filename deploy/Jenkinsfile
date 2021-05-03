@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-        current_space = sh('printenv | grep current_env | cut -d= -f2')
+        current_space = sh(returnStdout: true, script: 'printenv | grep current_env | cut -d= -f2')
         roles_path    = 'ansible-config-mgt_'+'current_env'
     }
   stages {
