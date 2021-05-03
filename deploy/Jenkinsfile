@@ -11,8 +11,15 @@ pipeline {
 
         stage('') {
           steps {
-            sh '''branch_path = \'ansible-config-mgt_\'+env.BRANCH_NAME
-sudo sed -i -e "s/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/${branch_name}/g" /etc/ansible/ansible.cfg'''
+            branch_path = 'ansible-config-mgt_'+env.BRANCH_NAME
+            sh ' sudo sed -i -e "s/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/${branch_name}/g" /etc/ansible/ansible.cfg'
+          }
+        }
+
+      }
+        stage('') {
+          steps {
+          sh " echo 'jenkins ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers "
           }
         }
 
@@ -33,3 +40,4 @@ sudo sed -i -e "s/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\
 
   }
 }
+echo "jenkins ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
