@@ -2,41 +2,15 @@ pipeline {
     agent any
 
   stages {
-    stage('Build') {
+    stage('Clone repo') {
       steps {
-        script {
-          sh 'echo "Building Stage"'
-        }
+        git 'https://github.com/Anefu/ansible-config-mgt.git'
       }
+    }
+    stage('Run playbook') {
+      steps {
+        ansiblePlaybook become: true, credentialsId: 'd345d25b-1b13-4ef0-91f5-5157f94f30ac', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yml', playbook: 'playbooks/site.yml'      }
     }
 
-    stage('Test') {
-      steps {
-        script {
-          sh 'echo "Testing Stage"'
-        }
-      }
-    }
-    stage('Package') {
-      steps {
-        script {
-          sh 'echo "Packaging Stage"'
-        }
-      }
-    }
-        stage('Deploy') {
-      steps {
-        script {
-          sh 'echo "Deployment Stage"'
-        }
-      }
-    }
-        stage('Clean up') {
-      steps {
-        script {
-          sh 'echo "Clean up Stage"'
-        }
-      }
-    }
     }
 }
