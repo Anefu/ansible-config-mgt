@@ -2,25 +2,26 @@ pipeline {
   agent any
   stages {
     stage('Clone repo') {
-      steps {
-        git(branch: 'dev', url: 'https://github.com/Anefu/ansible-config-mgt.git')
+      parallel {
+        stage('Clone repo') {
+          steps {
+            git(branch: 'dev', url: 'https://github.com/Anefu/ansible-config-mgt.git')
+          }
+        }
+
+        stage('') {
+          steps {
+            sh '''branch_path = \'ansible-config-mgt_\'+env.BRANCH_NAME
+sudo sed -i -e "s/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/${branch_name}/g" /etc/ansible/ansible.cfg'''
+          }
+        }
+
       }
     }
 
     stage('Run playbook') {
-      parallel {
-        stage('Run playbook') {
-          steps {
-            ansiblePlaybook(credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev', playbook: 'playbooks/site.yml')
-          }
-        }
-
-        stage('Update ansible.cfg') {
-          steps {
-            sh 'sudo sed -i -e "s/#roles_path * = \\/etc\\/ansible\\/roles/roles_path = \\/var\\/lib\\/jenkins\\/workspace\\/\'ansible-config-mgt_\'+env.BRANCH_NAME/g" /etc/ansible/ansible.cfg'
-          }
-        }
-
+      steps {
+        ansiblePlaybook(credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev', playbook: 'playbooks/site.yml')
       }
     }
 
