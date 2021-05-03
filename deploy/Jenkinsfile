@@ -10,7 +10,11 @@ pipeline {
     stage('Run playbook') {
       steps {
         ansiblePlaybook credentialsId: 'd345d25b-1b13-4ef0-91f5-5157f94f30ac', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev.yml', playbook: 'playbooks/site.yml'      }
+    }
+    stage('Clean up') {
+      steps {
         deleteDir()
+      }
     }
 
     }
