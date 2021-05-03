@@ -23,6 +23,7 @@
        src: "{{ tooling_database_location }}"
        dest: /home/
        mode: 0777
+  notify: restart mysql
 
 - name: Dump tooling app database table
   mysql_db:
