@@ -4,7 +4,7 @@ pipeline {
   stages {
     stage('Clone repo') {
       steps {
-        git branch: 'dev/test-dev', url: 'https://github.com/Anefu/ansible-config-mgt.git'
+        git branch: 'dev', url: 'https://github.com/Anefu/ansible-config-mgt.git'
       }
     }
     stage('Run playbook') {
