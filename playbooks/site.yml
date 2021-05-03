@@ -1,9 +1,8 @@
 ---
-- import_playbook: ../static-assignments/common.yml
 - import_playbook: ../static-assignments/webservers.yml
 - import_playbook: ../static-assignments/mysql.yml
 
-- hosts: lb
+- hosts: nginx
   tasks:
     - name: Load dynamic vars
       include_tasks: ../dynamic-assignments/env-vars.yml
