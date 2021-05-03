@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-        current_env = sh('printenv | grep current_env | cut -d= -f2')
+        current_space = sh('printenv | grep current_env | cut -d= -f2')
         roles_path    = 'ansible-config-mgt_'+'current_env'
     }
   stages {
@@ -9,7 +9,7 @@ pipeline {
       parallel {
         stage('Clone repo') {
           steps {
-            git(branch: current_env, url: 'https://github.com/Anefu/ansible-config-mgt.git')
+            git(branch: current_space, url: 'https://github.com/Anefu/ansible-config-mgt.git')
           }
         }
 
