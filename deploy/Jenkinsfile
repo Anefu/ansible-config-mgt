@@ -2,6 +2,7 @@ pipeline {
   agent any
   parameters {
       string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+      string(name: 'tag', defaultValue: 'all',  description: 'Tags to run ansible playbook against')
     }
   environment {
         cpath = '/var/lib/jenkins/workspace/ansible-config-mgt_'+"${inventory}"+'/roles'
@@ -26,7 +27,7 @@ pipeline {
 
     stage('Run playbook') {
       steps {
-        ansiblePlaybook(credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml')
+        ansiblePlaybook(credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml', tags: "${tag}")
       }
     }
 
