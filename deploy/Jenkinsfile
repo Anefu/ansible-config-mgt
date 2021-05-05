@@ -1,15 +1,17 @@
 pipeline {
   agent any
+  parameters {
+      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    }
   environment {
-        current_space = 'dev'
-        cpath = '/var/lib/jenkins/workspace/ansible-config-mgt_'+"${current_space}"+'/roles'
+        cpath = '/var/lib/jenkins/workspace/ansible-config-mgt_'+"${inventory}"+'/roles'
     }
   stages {
     stage('Clone repo') {
       parallel {
         stage('Clone repo') {
           steps {
-            git(branch: current_space, url: 'https://github.com/Anefu/ansible-config-mgt.git')
+            git(branch: "${inventory}", url: 'https://github.com/Anefu/ansible-config-mgt.git')
           }
         }
 
@@ -24,7 +26,7 @@ pipeline {
 
     stage('Run playbook') {
       steps {
-        ansiblePlaybook(credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/dev', playbook: 'playbooks/site.yml')
+        ansiblePlaybook(credentialsId: 'private-key', disableHostKeyChecking: true, installation: 'ansible', inventory: 'inventory/${inventory}', playbook: 'playbooks/site.yml')
       }
     }
 
