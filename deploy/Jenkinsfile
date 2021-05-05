@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
         current_space = 'dev'
+        path = '/var/lib/jenkins/workspace/anisble-config-mgt_'+'${current_space}'+'/roles'
     }
   stages {
     stage('Clone repo') {
@@ -14,7 +15,7 @@ pipeline {
 
         stage('Update ansible.cfg') {
           steps {
-            sh (script: '/var/lib/jenkins/script.sh')
+            sh ("sudo sed -i -e '/roles_path = \\/[a-z]*\\/*/a\\roles_path = ${path}' -e '/roles_path = \\/[a-z]*\\/*/d' /etc/ansible/ansible.cfg")
           }
         }
       }
