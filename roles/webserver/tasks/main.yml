@@ -35,10 +35,7 @@
 
 - name: Set SELinux persistent booleans
   become: yes
-  ansible.posix.seboolean:
-    name:
-      - httpd_can_network_connect
-      - httpd_can_network_connect_db
-      - httpd_execmem
-    state: yes
-    persistent: yes
+  shell: |
+    sudo setsebool httpd_can_network_connect 1
+    sudo setsebool httpd_can_network_connect_db 1
+    sudo setsebool httpd_execmem 1
