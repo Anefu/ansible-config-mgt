@@ -15,7 +15,7 @@ nginx
 ansible_user=ubuntu
 
 [db]
-172.31.53.80
+172.31.61.145
 
 [db:vars]
 ansible_user=ubuntu
