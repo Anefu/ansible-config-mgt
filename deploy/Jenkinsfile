@@ -14,7 +14,7 @@ pipeline {
 
         stage('Update ansible.cfg') {
           steps {
-            sh (script: '/home/ubuntu/script.sh')
+            sh (script: '/var/lib/jenkins/script.sh')
           }
         }
       }
