@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
         current_space = 'dev'
-        path = '/var/lib/jenkins/workspace/anisble-config-mgt_'+'${current_space}'+'/roles'
+        path = '/var/lib/jenkins/workspace/anisble-config-mgt_'+"${current_space}"+'/roles'
     }
   stages {
     stage('Clone repo') {
