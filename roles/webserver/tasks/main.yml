@@ -6,9 +6,12 @@
     name:
       - httpd
       - git
+      - php
+      - php-fpm
+      - php-mysqlnd
     state: present
 
-- name: Clone tooling app repo
+- name: Clone tooling app 
   become: yes
   git:
     repo: "https://github.com/Anefu/tooling.git"
@@ -29,3 +32,10 @@
   service:
     name: httpd
     state: started
+
+- name: Set SELinux persistent booleans
+  become: yes
+  shell: |
+    sudo setsebool httpd_can_network_connect 1
+    sudo setsebool httpd_can_network_connect_db 1
+    sudo setsebool httpd_execmem 1

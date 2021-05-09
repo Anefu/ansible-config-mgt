@@ -1,0 +1,18 @@
+[db]
+172.31.53.180 ansible_user=ubuntu
+
+[tooling]
+172.31.53.161
+
+[todo]
+172.31.63.13
+
+[nginx]
+172.31.60.93 ansible_user=ubuntu
+
+[web:children]
+tooling
+todo
+
+[web:vars]
+ansible_user=ec2-user

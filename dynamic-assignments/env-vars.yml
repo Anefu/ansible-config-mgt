@@ -1,7 +1,7 @@
 ---
 - name: Collate environment variables
   vars:
-    - current_env: uat
+    - current_env: dev
   include_vars: "{{ item }}"
   with_first_found:
     - "../env-vars/{{ current_env }}.yml"
