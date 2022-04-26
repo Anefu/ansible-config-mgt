@@ -5,8 +5,7 @@ pipeline {
     string(name: 'tag', defaultValue: 'all',  description: 'Tags to run ansible playbook against')
   }
   environment {
-    current_space = 'dev'
-    cpath = '/var/lib/jenkins/workspace/ansible-config-mgt_'+"${current_space}"+'/roles'
+    branch = 'feature/jenkinspipeline-stages'
   }
   stages {
 
@@ -18,7 +17,7 @@ pipeline {
 
     stage('Update ansible.cfg') {
       steps {
-        sh ('sudo sed -i -e "/roles_path = \\/[a-z]*\\/*/a\\roles_path = $cpath" -e "/roles_path = \\/[a-z]*\\/*/d" /etc/ansible/ansible.cfg')
+        sh "export ANSIBLE_CONFIG=${WORKSPACE}/deploy/ansible.cfg"
       }
     }
 
@@ -33,6 +32,6 @@ pipeline {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
       }
     }
-    
+
   }
 }
