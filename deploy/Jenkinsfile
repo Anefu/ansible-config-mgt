@@ -1,30 +1,25 @@
 pipeline {
   agent any
   parameters {
-      string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
-      string(name: 'tag', defaultValue: 'all',  description: 'Tags to run ansible playbook against')
-    }
+    string(name: 'inventory', defaultValue: 'dev',  description: 'This is the inventory file for the environment to deploy configuration')
+    string(name: 'tag', defaultValue: 'all',  description: 'Tags to run ansible playbook against')
+  }
   environment {
-        current_space = 'dev'
-        cpath = '/var/lib/jenkins/workspace/ansible-config-mgt_'+"${current_space}"+'/roles'
-    }
+    branch = 'feature/jenkinspipeline-stages'
+  }
   stages {
-    stage('Clone repo') {
-      parallel {
-        stage('Clone repo') {
-          steps {
-            git(branch: current_space, url: 'https://github.com/Anefu/ansible-config-mgt.git')
-          }
-        }
 
-        stage('Update ansible.cfg') {
-          steps {
-            sh ('sudo sed -i -e "/roles_path = \\/[a-z]*\\/*/a\\roles_path = $cpath" -e "/roles_path = \\/[a-z]*\\/*/d" /etc/ansible/ansible.cfg')
-          }
-        }
+    stage('Clone repo') {
+      steps {
+        git(branch: branch, url: 'https://github.com/Anefu/ansible-config-mgt.git')
       }
     }
-    
+
+    stage('Update ansible.cfg') {
+      steps {
+        sh "export ANSIBLE_CONFIG=${WORKSPACE}/deploy/ansible.cfg"
+      }
+    }
 
     stage('Run playbook') {
       steps {
@@ -37,6 +32,6 @@ pipeline {
         cleanWs(cleanWhenAborted: true, cleanWhenFailure: true, cleanWhenNotBuilt: true, cleanWhenUnstable: true, deleteDirs: true)
       }
     }
+
   }
 }
-
