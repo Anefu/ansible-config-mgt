@@ -11,7 +11,7 @@ pipeline {
 
     stage('Clone repo') {
       steps {
-        git(branch: current_space, url: 'https://github.com/Anefu/ansible-config-mgt.git')
+        git(branch: branch, url: 'https://github.com/Anefu/ansible-config-mgt.git')
       }
     }
 
