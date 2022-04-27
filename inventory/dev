@@ -19,3 +19,6 @@ ansible_user=ubuntu
 
 [db:vars]
 ansible_user=ubuntu
+
+[artifactory]
+172.31.8.119 ansible_user=ubuntu
