@@ -1,13 +1,10 @@
 ---
-- hosts: db
 - name: database assignment
   ansible.builtin.import_playbook: ../static-assignments/mysql.yml
 
-- hosts: nginx
 - name: nginx assignment
   ansible.builtin.import_playbook: ../static-assignments/loadbalancers.yml
 
-- hosts: web
 - name: webservers assignment
   ansible.builtin.import_playbook: ../static-assignments/webservers.yml
 

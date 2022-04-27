@@ -1,5 +1,6 @@
 ---
-- roles: 
+- hosts: web
+  roles: 
     - webserver
   tags:
     - webserver
