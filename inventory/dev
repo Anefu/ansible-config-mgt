@@ -1,11 +1,11 @@
 [tooling]
-172.31.24.125 ansible_user=ec2-user
+172.31.7.177 ansible_user=ec2-user
 
 [todo]
-172.31.31.221
+172.31.13.148
 
 [nginx]
-172.31.57.28
+172.31.14.79
 
 [web:children]
 todo
@@ -15,7 +15,7 @@ nginx
 ansible_user=ubuntu
 
 [db]
-172.31.61.145
+172.31.4.253
 
 [db:vars]
 ansible_user=ubuntu
