@@ -5,11 +5,11 @@
 172.31.13.148
 
 [nginx]
-172.31.14.79
+172.31.14.79 ansible_user=ubuntu
 
 [web:children]
 todo
-nginx
+tooling
 
 [web:vars]
 ansible_user=ubuntu
