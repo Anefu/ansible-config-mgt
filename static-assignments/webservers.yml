@@ -1,7 +1,5 @@
 ---
-- hosts: tooling
-  become: yes
-  roles: 
+- roles: 
     - webserver
   tags:
     - webserver

@@ -1,12 +1,24 @@
 ---
-- name: webservers
-  ansible.builtin.import_playbook: ../static-assignments/webservers.yml
-
-- ansible.builtin.import_playbook: ../static-assignments/mysql.yml
+- hosts: db
+- name: database assignment
+  ansible.builtin.import_playbook: ../static-assignments/mysql.yml
 
 - hosts: nginx
-  tasks:
-    - name: Load dynamic vars
-      include_tasks: ../dynamic-assignments/env-vars.yml
+- name: nginx assignment
+  ansible.builtin.import_playbook: ../static-assignments/loadbalancers.yml
 
-- ansible.builtin.import_playbook: ../static-assignments/loadbalancers.yml
+- hosts: web
+- name: webservers assignment
+  ansible.builtin.import_playbook: ../static-assignments/webservers.yml
+
+# - hosts: artifactory
+# - name: artifactory assignment
+#   ansible.builtin.import_playbook: ../static-assignments/artifactory.yml
+
+# - hosts: sonar
+# - name: sonar assignment
+#   ansible.builtin.import_playbook: ../static-assignments/sonar.yml
+
+# - hosts: todo
+# - name: Deploy the todo application
+#   ansible.builtin.import_playbook: ../static-assignments/deployment.yml
