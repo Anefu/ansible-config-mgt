@@ -1,5 +1,5 @@
 [tooling]
-172.31.7.177 ansible_user=ec2-user
+172.31.12.250 ansible_user=ec2-user
 
 [todo]
 172.31.13.148
