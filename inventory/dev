@@ -8,7 +8,6 @@
 172.31.14.79 ansible_user=ubuntu
 
 [web:children]
-todo
 tooling
 
 [web:vars]
