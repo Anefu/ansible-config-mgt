@@ -2,14 +2,14 @@
 # - name: database assignment
 #   ansible.builtin.import_playbook: ../static-assignments/mysql.yml
 
-- name: Import env vars
-  ansible.builtin.include_tasks: ../dynamic-assignments/env-vars.yml
+- name: webservers assignment
+  ansible.builtin.import_playbook: ../static-assignments/webservers.yml
+
+# - name: Import env vars
+#   ansible.builtin.include_tasks: ../dynamic-assignments/env-vars.yml
 
 - name: nginx assignment
   ansible.builtin.import_playbook: ../static-assignments/loadbalancers.yml
-
-- name: webservers assignment
-  ansible.builtin.import_playbook: ../static-assignments/webservers.yml
 
 - name: artifactory assignment
   ansible.builtin.import_playbook: ../static-assignments/artifactory.yml
