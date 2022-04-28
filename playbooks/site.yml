@@ -1,6 +1,9 @@
 ---
-- name: database assignment
-  ansible.builtin.import_playbook: ../static-assignments/mysql.yml
+# - name: database assignment
+#   ansible.builtin.import_playbook: ../static-assignments/mysql.yml
+
+- name: Import env vars
+  ansible.builtin.include_tasks: ../dynamic-assignments/env-vars.yml
 
 - name: nginx assignment
   ansible.builtin.import_playbook: ../static-assignments/loadbalancers.yml
