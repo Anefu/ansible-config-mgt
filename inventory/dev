@@ -20,4 +20,4 @@ ansible_user=ubuntu
 ansible_user=ubuntu
 
 [artifactory]
-172.31.8.119 ansible_user=ubuntu
+172.31.89.252 ansible_user=ubuntu
